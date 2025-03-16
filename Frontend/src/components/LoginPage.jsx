@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { userLogin } from "../api/api";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/userSlice";
 
-const LoginPage = ({ setLogin }) => {
+const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onChangeHandler = (identifier, value) => {
     setLoginData((prev) => ({ ...prev, [identifier]: value }));
@@ -19,6 +24,8 @@ const LoginPage = ({ setLogin }) => {
       if (res.data.success) {
         toast.success(res.data.message);
       }
+      dispatch(setUser(res.data.user));
+      navigate("/browse");
     } catch (error) {
       toast.error(error.response.data.message);
       console.log("Error", error);
@@ -72,9 +79,8 @@ const LoginPage = ({ setLogin }) => {
         <p className="text-gray-400 mt-8">
           New to Netflix?
           <a
-            onClick={() => setLogin(false)}
-            href="#"
-            className="text-white hover:underline"
+            onClick={() => navigate("/register")}
+            className="text-white hover:underline cursor-pointer"
           >
             Sign up now
           </a>
@@ -83,9 +89,7 @@ const LoginPage = ({ setLogin }) => {
 
         <p className="text-gray-400 text-sm mt-4">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.
-          <a href="#" className="text-blue-500 hover:underline">
-            Learn more.
-          </a>
+          <a className="text-blue-500 hover:underline ">Learn more.</a>
         </p>
       </div>
     </div>

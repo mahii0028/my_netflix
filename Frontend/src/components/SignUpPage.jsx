@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { userRegister } from "../api/api";
 
@@ -8,6 +9,7 @@ const SignUpPage = ({ setLogin }) => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const onChangeHandler = (identifier, value) => {
     setSignUpData((prev) => ({ ...prev, [identifier]: value }));
@@ -19,6 +21,7 @@ const SignUpPage = ({ setLogin }) => {
       const res = await userRegister(signUpData); // Register api call
       if (res.data.success) {
         toast.success(res.data.message);
+        navigate("/");
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -81,9 +84,8 @@ const SignUpPage = ({ setLogin }) => {
         <p className="text-gray-400 mt-8">
           Already Have an account?
           <a
-            onClick={() => setLogin(true)}
-            href="#"
-            className="text-white hover:underline"
+            onClick={() => navigate("/")}
+            className="text-white hover:underline cursor-pointer"
           >
             Sign in now
           </a>

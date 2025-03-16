@@ -76,6 +76,7 @@ export const userLogin = async (req, res) => {
       .json({
         message: `Welcome back ${user.userName}`,
         success: true,
+        user,
       });
   } catch (error) {
     console.log("Error:", error);
