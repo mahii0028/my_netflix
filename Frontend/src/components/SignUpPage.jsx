@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { userRegister } from "../api/api";
 
 const SignUpPage = ({ setLogin }) => {
   const [signUpData, setSignUpData] = useState({
@@ -11,9 +13,17 @@ const SignUpPage = ({ setLogin }) => {
     setSignUpData((prev) => ({ ...prev, [identifier]: value }));
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(signUpData);
+    try {
+      const res = await userRegister(signUpData); // Register api call
+      if (res.data.success) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log("Error", error);
+    }
   };
   return (
     <div className="absolute rounded-sm min-h-[600px] left-[35%] top-[100px] flex items-center justify-center bg-black opacity-90">
@@ -59,10 +69,10 @@ const SignUpPage = ({ setLogin }) => {
 
           <div className="flex justify-between items-center text-sm text-gray-400">
             <div>
-              <input type="checkbox" id="remember-me" class="mr-2" />
-              <label for="remember-me">Remember me</label>
+              <input type="checkbox" id="remember-me" className="mr-2" />
+              <label htmlFor="remember-me">Remember me</label>
             </div>
-            <a href="#" class="hover:underline">
+            <a href="#" className="hover:underline">
               Need help?
             </a>
           </div>
