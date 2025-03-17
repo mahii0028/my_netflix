@@ -1,19 +1,20 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Header from "../components/Header";
 import netflixBanner from "../assets/netflix_banner.jpg";
 import LoginPage from "../components/LoginPage";
 
-
 const Login = () => {
   return (
-    <div>
+    <div className="relative w-full h-screen">
       <Header />
-      <div className="absolute w-full">
-        <img className="w-full" src={netflixBanner} alt="netflixBanner" />
-        <Fragment>
-          <LoginPage />
-        </Fragment>
-      </div>
+      <img
+        className="absolute w-full h-full object-cover"
+        src={netflixBanner}
+        alt="netflixBanner"
+      />
+      <Fragment>
+        <LoginPage />
+      </Fragment>
     </div>
   );
 };

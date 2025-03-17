@@ -5,14 +5,16 @@ import Header from "../components/Header";
 
 const Register = () => {
   return (
-    <div>
+    <div className="relative w-full h-screen">
       <Header />
-      <div className="absolute w-full">
-        <img className="w-full" src={netflixBanner} alt="netflixBanner" />
-        <Fragment>
-          <SignUpPage />
-        </Fragment>
-      </div>
+      <img
+        className="absolute w-full h-full object-cover"
+        src={netflixBanner}
+        alt="netflixBanner"
+      />
+      <Fragment>
+        <SignUpPage />
+      </Fragment>
     </div>
   );
 };
