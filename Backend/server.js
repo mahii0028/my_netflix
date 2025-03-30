@@ -16,6 +16,7 @@ app.use(
   cors({
     origin: "http://localhost:5173", // Or your frontend URL
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
