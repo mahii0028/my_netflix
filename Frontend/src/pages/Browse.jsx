@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import MovieContainer from "../components/MovieContainer";
+import SearchMovies from "../components/SearchMovies";
 import {
   nowPlayingMovies,
   popularMovies,
@@ -20,6 +21,8 @@ import useMovies from "../hooks/useMovies";
 
 const Browse = () => {
   const { user } = useSelector((state) => state.user);
+  const isSearchMovie = useSelector((state) => state.movie.isSearchMovie);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,10 +39,14 @@ const Browse = () => {
   return (
     <Fragment>
       <Header />
-      <div>
-        <MainContainer />
-        <MovieContainer />
-      </div>
+      {isSearchMovie ? (
+        <SearchMovies />
+      ) : (
+        <div>
+          <MainContainer />
+          <MovieContainer />
+        </div>
+      )}
     </Fragment>
   );
 };

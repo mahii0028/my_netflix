@@ -2,12 +2,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import netflixLogo from "../assets/netflix_logo.png";
 import { setUser } from "../store/userSlice";
+import { handleSearchMovie } from "../store/movieSlice";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../api/api";
 import toast from "react-hot-toast";
 
 const Header = () => {
   const { user } = useSelector((state) => state.user);
+  const isSearchMovie = useSelector((state) => state.movie.isSearchMovie);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,8 +46,11 @@ const Header = () => {
             >
               Logout
             </button>
-            <button className="bg-red-800 text-white px-2 sm:px-4 py-1 sm:py-2 ml-2 cursor-pointer">
-              Search Movie
+            <button
+              onClick={() => dispatch(handleSearchMovie())}
+              className="bg-red-800 text-white px-2 sm:px-4 py-1 sm:py-2 ml-2 cursor-pointer"
+            >
+              {isSearchMovie ? "Home" : "Search Movie"}
             </button>
           </div>
         </div>

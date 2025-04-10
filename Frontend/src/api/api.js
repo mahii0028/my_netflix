@@ -31,3 +31,4 @@ export const nowPlayingMovies = () => tmdbInstance.get("/movie/now_playing");
 export const popularMovies = () => tmdbInstance.get("/movie/popular");
 export const topRatedMovies = () => tmdbInstance.get("/movie/top_rated");
 export const upComingMovies = () => tmdbInstance.get("/movie/upcoming");
+export const movieById = (id) => tmdbInstance.get(`/movie/${id}/videos`);
